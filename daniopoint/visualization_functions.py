@@ -137,25 +137,12 @@ def well_response(file, location, timepoint, endpoint, plate_size=96):
 def visualize_plots(file, location, endpoint, plate_type=96, treatments_file=None, save_plots=True, start_range=None):
     if plate_type not in [24, 48, 96]:
         raise ValueError("Unsupported plate type. Supported types are 24, 48, and 96.")
-
-    num_rows = 8
-    num_columns = 12 if plate_type == 96 else 6
-
     file_name = os.path.basename(file)
     name, extension = os.path.splitext(file_name)
     if format(extension) == ".xlsx":
         df = pd.read_excel(file)
     else:
         df = pd.read_table(file, encoding="utf-16", low_memory=False)
-
-    if plate_type == 24:
-        location_mapping = {f'c{i:02d}': f'{chr(65 + (i - 1) // 6)}{((i - 1) % 6) + 1:02d}' for i in range(1, 25)}
-    elif plate_type == 48:
-        location_mapping = {f'c{i:02d}': f'{chr(65 + (i - 1) // 6)}{((i - 1) % 6) + 1:02d}' for i in range(1, 49)}
-    else:
-        location_mapping = {f'c{i:02d}': f'{chr(65 + (i - 1) // 12)}{((i - 1) % 12) + 1:02d}' for i in range(1, 97)}
-
-    df['well_plate_position'] = df[location].map(location_mapping)
 
     if treatments_file is not None:
         treatments_df = pd.read_excel(treatments_file)
@@ -164,20 +151,9 @@ def visualize_plots(file, location, endpoint, plate_type=96, treatments_file=Non
     else:
         df['treatment'] = 'Unknown'
 
-    well_mapping = {f'{chr(65 + r)}{c + 1:02d}': (r, c) for r in range(num_rows) for c in range(num_columns)}
-
     # Filter the DataFrame based on the start_range
     if start_range is not None:
         df = df[(df['start'] >= start_range[0]) & (df['start'] <= start_range[1])]
-
-    plate = np.zeros((num_rows, num_columns))
-
-    for _, row in df.iterrows():
-        well = row['well_plate_position']
-        measurement = row[endpoint]
-        row_idx, col_idx = well_mapping.get(well, (-1, -1))
-        if row_idx != -1 and col_idx != -1:
-            plate[row_idx, col_idx] += measurement
 
     # Boxplot by Treatment with different colors
     plt.figure(figsize=(10, 6))
@@ -198,6 +174,17 @@ def visualize_plots(file, location, endpoint, plate_type=96, treatments_file=Non
 
     if save_plots:
         plt.savefig(f'test/lineplot_{endpoint}_start_range.png')
+    else:
+        plt.show()
+    plt.close()
+
+    # Distribution plot by Treatment
+    plt.figure(figsize=(10, 6))
+    sns.histplot(data=df, x=endpoint, hue='treatment', multiple="stack", kde=True)
+    plt.title(f'Distribution of {endpoint} by Treatment within Start Range')
+
+    if save_plots:
+        plt.savefig(f'test/histplot_{endpoint}_start_range.png')
     else:
         plt.show()
     plt.close()
@@ -227,13 +214,4 @@ def visualize_plots(file, location, endpoint, plate_type=96, treatments_file=Non
         plt.show()
     plt.close()
 
-    # Distribution plot by Treatment
-    plt.figure(figsize=(10, 6))
-    sns.histplot(data=df, x=endpoint, hue='treatment', multiple="stack", kde=True)
-    plt.title(f'Distribution of {endpoint} by Treatment within Start Range')
 
-    if save_plots:
-        plt.savefig(f'test/histplot_{endpoint}_start_range.png')
-    else:
-        plt.show()
-    plt.close()

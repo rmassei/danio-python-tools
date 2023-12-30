@@ -68,7 +68,7 @@ for multiple comparison and the stars plotted over the boxplot.
 
 ## Metadata utility
 
-`metadata_utility.metadata_compiler(file)`
+`danipoint.metadata_utility.metadata_compiler(file)`
 
 This function allows the extraction of experimental metadata from the ViewPoint file. Results are then saved as a 
 txt file.
@@ -93,6 +93,17 @@ txt file.
     172992        1800.0         D1          30.0
     230688        2400.0         L2          40.0
     345984        3600.0         D2          60.0
+
+
+## Jupyter notebook
+* JN - Visualization Functions 
+
+    visualize_plate
+
+    visualize plot
+* JN - Metadata extraction
+
+    utility.metadata_compiler
 
 
 ## Testing
