@@ -4,7 +4,7 @@ the analysis and visualization of behavioural responses recorded using the Zebra
 At the present, only single plate analysis is supported by daniopoint-py
 The repository includes jupyter lab-books and KNIME workflows.
 
-## Package requirements
+### Package requirements
 python 3.11
 * pandas~=2.1.4
 * matplotlib~=3.8.2
@@ -101,9 +101,16 @@ txt file.
     visualize_plate
 
     visualize plot
+* 
 * JN - Metadata extraction
 
-    utility.metadata_compiler
+    metadata_compiler
+
+## KNIME workflows
+
+* KNIME-danio-python-tools-heatmap (KNIME version: 4.7.8)
+  
+  Workflow integrating the visualize_plot python script to create and save a single heatmap
 
 
 ## Testing
