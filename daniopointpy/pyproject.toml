@@ -5,7 +5,7 @@ requires      = ["setuptools>=61.0.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "daniopoint-py"
+name = "daniopointpy"
 version = "0.9.0"
 description = "Read te README.md"
 readme = "README.md"

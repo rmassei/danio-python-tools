@@ -1,8 +1,7 @@
-from daniopoint import *
-from daniopoint import visualization_functions
-from daniopoint import metadata_utility
+from daniopointpy import visualization_functions
+from daniopointpy import metadata_utility
 
-print(f"--- Welcome to daniopoint.py version {daniopoint_vv}! ---\n"
+print(f"--- Welcome to daniopoint.py version 0.9.0! ---\n"
       f"This is a open python package for the analysis of Danio rerio behaviour\n"
       f"For additional information, please, visit the GitHub "
       f"repository: https://github.com/rmassei/danio-python-tools")
