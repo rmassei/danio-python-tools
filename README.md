@@ -1,8 +1,21 @@
-# daniopoint-py
+# danio-python-tools
+Danio-python tools is a repository collecting different tools for the analysis of behavioural and acute toxicity 
+tests performed with zebrafish (Danio rerio) embryos. 
+
+### Curators and maintainers
+- Riccardo Massei
+
+### Status 
+December 2023 - Active and ongoing project
+
+### Testing
+The python package, jupiter notebooks and KNIME workflows can be tested using the testdata.xlsx or testdata2.csv file
+
+
+## daniopoint-py - Python package for behaviour analysis
 Daniopoint-py is a utility package written in Python. The package allows
 the analysis and visualization of behavioural responses recorded using the ZebraBox system (Viewpoint).
 At the present, only single plate analysis is supported by daniopoint-py
-The repository includes jupyter lab-books and KNIME workflows.
 
 ### Package requirements
 python 3.11
@@ -113,11 +126,3 @@ txt file.
   Workflow integrating the visualize_plot python script to create and save a single heatmap
 
 
-## Testing
-The package can be tested using the testdata.xlsx or testdata2.csv file
-
-## Curators and maintainers
-- Riccardo Massei
-
-## Status 
-Active and ongoing project (December 2023)

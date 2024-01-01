@@ -1,6 +1,6 @@
-main.py
-jupyter/.ipynb_checkpoints
-manuscript/manuscript_draft.docx
-test/testdata2.csv
+daniopoint-py/test.py
 paper.md
+jupyter/.ipynb_checkpoints
+daniopoint-py/test/testdata2.csv
+
 
