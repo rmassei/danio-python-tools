@@ -1,6 +1,0 @@
-File Name: testdata
-Extension: .xlsx
-The user BIOTOX40\ZEB384-3 run the test on the 2019-06-14 00:00:00. The test started at 09:11:33.
-The test was run in a 96 well plate.
-Binning was set at 60.0 seconds while datatype was set as "trackerr". 
-Total measurement time was 2400 seconds (40.0 minutes).
