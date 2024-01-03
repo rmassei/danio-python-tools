@@ -27,53 +27,28 @@ python 3.11
 * statsmodels~=0.14.1
 
 ## Visualization Functions
-`daniopoint.visualization_functions.visualize_plate(file, location, endpoint,  plate_size)`
+`daniopoint.visualization_functions.visualize_plate(file, location, endpoint)`
 
 This function will visualize the total sum of a specific endpoint all measurement time in a plate.
-
-**Parameters:**
-
-* **file (str):** The path with the ViewPoint file (supported extension are .xlsx and .csv)
-* **location (str):** The column header of the ViewPoint file listing the animal location, The script accept the format c01 up to c96.
-* **endpoint (str):** The column header of the endpoint to analyze (i.e. smldist, smldur, lardist)
-* **plate_size (int | 24, 48, 96):** The plate format expressed in number of wells
 
 *Example*
 
 ![plate_visualization.png](docs%2Fplate_visualization.png)
 
-`daniopoint.visualization_functions.well_response(file, location,  timepoint,  endpoint,  plate_size)`
+`daniopoint.visualization_functions.well_response(file, location,  timepoint,  endpoint)`
 
 This function will create an Excel file with 1) the total sum for a specific endpoint and 2) an image with the endpoint trend along measurement.
 Each well trend are also saved as image in a zip file.
-
-**Parameters:**
-
-* **file (str):** The path with the ViewPoint file (supported extension are .xlsx and .csv)
-* **location (str):** The column header of the file listing the animal location, The script accept the format c01 up to c96.
-* **timepoint (str):** The column header of the file listing the measurement timepoint (usually "start" or "end")
-* **endpoint (str):** The column header of the endpoint to analyze (i.e. smldist, smldur, lardist)
-* **plate_size (int | 24, 48, 96):** The plate format expressed in number of wells
 
 *Example*
 
 ![well_A01.png](docs%2Fwell_A01.png)
 
-`daniopoint.visualization_functions.visualize_plots(file, location, endpoint, plate_size, treatments_file, save_plots, start_range)`
+`daniopoint.visualization_functions.visualize_plots(file, location, endpoint, treatments_file, save_plots, start_range)`
 
 This function will create three plots 1) a boxplot 2) a line plot and 3) a density plot. Images may be saved as separated .jpg files This function requires an additional
 treatment file listing the location and the treatment (an example is given in test/treatment.xlsx). The boxplot include a tukey-test
 for multiple comparison and the stars plotted over the boxplot.
-
-**Parameters:**
-
-* **file (str):** The path with the ViewPoint file (supported extension are .xlsx and .csv)
-* **location (str):** The column header of the file listing the animal location, The script accept the format c01 up to c96.
-* **endpoint (str):** The column header of the endpoint to analyze (i.e. smldist, smldur, lardist)
-* **plate_size (int | 24, 48, 96):** The plate format expressed in number of wells
-* **treatments_file (str):** The path with the treatment file
-* **save_plots (bool):** True/False to save the plot as jpg or not
-* **start_range (tuple):** Time range to plot (i.e. (500, 1200) between 500 and 1200 seconds
 
 *Example*
 
@@ -81,14 +56,10 @@ for multiple comparison and the stars plotted over the boxplot.
 
 ## Metadata utility
 
-`danipoint.metadata_utility.metadata_compiler(file)`
+`danipoint.metadata_utility.metadata_compiler(file, output)`
 
 This function allows the extraction of experimental metadata from the ViewPoint file. Results are then saved as a 
 txt file.
-
-**Parameters:**
-
-* **file (str):** The path with the ViewPoint file (supported extension are .xlsx and .csv)
 
 *Example:*
 

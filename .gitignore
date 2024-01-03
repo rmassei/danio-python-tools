@@ -1,6 +1,9 @@
 daniopointpy/test.py
+<<<<<<< HEAD
 daniopointpy/main.py
 paper.md
+=======
+>>>>>>> 9e1480c0aba2e1944ca6552935e2da9706f510e5
 jupyter/.ipynb_checkpoints
 daniopointpy/test/testdata2.csv
 

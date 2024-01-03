@@ -35,3 +35,4 @@ Homepage = "https://github.com/rmassei/danio-python-tools"
 
 [project.scripts]
 daniopoint-py = "src.__main__:main"
+
