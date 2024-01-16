@@ -51,7 +51,7 @@ def metadata_compiler(file, output=False):
         metadata["Phases"] = "Phase not detected"
     original_stdout = sys.stdout
     if output is True:
-        output_file_path = 'test/output.txt'
+        output_file_path = 'test/metadata.txt'
         try:
             with open(output_file_path, 'w') as f:
                 sys.stdout = f
