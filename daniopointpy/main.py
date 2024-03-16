@@ -1,4 +1,6 @@
-from daniopointpy import data_management
+from daniopointpy import metadata_utility
 
-data_management.numpy_transform("test/testdata.xlsx", "test/numpytest")
+metadata_utility.json_compiler("test/testdata.xlsx",
+                               compound= "Caffeine",
+                               strain= "OBI/WIK")
 

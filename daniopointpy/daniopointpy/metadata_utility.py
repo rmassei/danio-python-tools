@@ -1,13 +1,13 @@
 import pandas as pd
 import os
 import sys
+import json
 
 
 def metadata_compiler(file, output=False):
     """This function allows the extraction of experimental metadata from the ViewPoint file.
     Results are then saved as a txt file.
     Parameters:
-
     file (str): The path with the ViewPoint file (supported extension are .xlsx and .csv)"""
     metadata = {}
     file_name = os.path.basename(file)
@@ -66,4 +66,52 @@ def metadata_compiler(file, output=False):
                     print(result_df)
         finally:
             sys.stdout = original_stdout
+    return metadata
+
+
+def json_compiler(file, compound, strain):
+    """This function allows the extraction of experimental metadata from the ViewPoint file.
+    Results are then saved as a JSON file.
+    Parameters:
+    file (str): The path with the ViewPoint file (supported extension are .xlsx and .csv)"""
+
+    metadata = {}
+    file_name = os.path.basename(file)
+    name, extension = os.path.splitext(file_name)
+
+    if extension == ".xlsx":
+        df_raw = pd.read_excel(file)
+    else:
+        df_raw = pd.read_table(file, encoding="utf-16", low_memory=False)
+
+    unique_counts = df_raw['location'].nunique()
+    bin = df_raw.iloc[1]['end']
+    data_type = df_raw.iloc[1]['datatype']
+
+    # Convert Timestamp to string
+    date = str(df_raw.iloc[1]['stdate'])
+
+    user = df_raw.iloc[1]['user'] if 'user' in df_raw.columns else df_raw.iloc[1]['operator']
+
+    # Convert Timestamp to string
+    time = str(df_raw.iloc[1]['sttime'])
+
+    meas_time = df_raw['end'].iloc[-1]
+
+    metadata["File_Name"] = name
+    metadata["File_Extension"] = extension
+    metadata["User"] = user
+    metadata["Date"] = date
+    metadata["Time"] = time
+    metadata["Compound"] = compound
+    metadata["Strain"] = strain
+    metadata["Plate_type"] = f"{unique_counts} well plate"
+    metadata["Binning"] = f"{bin} seconds"
+    metadata["Data_Type"] = data_type
+    metadata["Measurement_Time_sec"] = round(meas_time)
+    metadata["Measurement_Time_min"] = round(meas_time) / 60
+    json_file_path = f"{name}_metadata.json"
+    with open(json_file_path, 'w') as json_file:
+        json.dump(metadata, json_file, indent=4)
+
     return metadata
