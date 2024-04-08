@@ -2,6 +2,7 @@ import os
 import zipfile
 
 import matplotlib.pyplot as plt
+from matplotlib.colors import ListedColormap
 import numpy as np
 import pandas as pd
 import io
@@ -10,6 +11,7 @@ import seaborn as sns
 from statsmodels.stats.multicomp import pairwise_tukeyhsd
 from openpyxl import Workbook
 from openpyxl.drawing.image import Image as ExcelImage
+
 
 
 def visualize_plate(file, location, endpoint):
@@ -43,6 +45,71 @@ def visualize_plate(file, location, endpoint):
     plt.xlabel('Columns')
     plt.ylabel('Rows')
     plt.title('Heatmap Example')
+    plt.show()
+
+
+def visualize_outlayers(file, location, endpoint):
+    # Read data
+    if file.endswith(".xlsx"):
+        df_raw = pd.read_excel(file)
+    else:
+        df_raw = pd.read_table(file, encoding="utf-16", low_memory=False)
+
+    # Get unique wells count and prepare data
+    well_numbers = df_raw[location].nunique()
+    df_1 = df_raw[[location, endpoint]]
+    df_2 = df_1.groupby(location).sum()
+    array = df_2.values
+
+    # Reshape array based on well number
+    if well_numbers == 24:
+        num2 = array.reshape(4, 6)
+        columns = list(range(1, 7))
+        rows = [chr(ord('A') + i) for i in range(4)]
+    elif well_numbers == 48:
+        num2 = array.reshape(6, 8)
+        columns = list(range(1, 9))
+        rows = [chr(ord('A') + i) for i in range(6)]
+    elif well_numbers == 96:
+        num2 = array.reshape(8, 12)
+        columns = list(range(1, 13))
+        rows = [chr(ord('A') + i) for i in range(8)]
+    else:
+        print("Plate format not supported... Sorry!")
+        return
+
+    # Calculate mean and standard deviation for outlier detection
+    mean_value = np.mean(array)
+    std_value = np.std(array)
+    outlier_threshold = mean_value + std_value
+
+    # Create a mask for normal and outlier data
+    normal_data_mask = num2 <= outlier_threshold
+    outlier_data_mask = num2 > outlier_threshold
+
+    # Create custom colormap: outliers are red, others are white
+    cmap = ListedColormap(['white', 'red'])
+    norm = plt.Normalize(0, 1)
+    data_colors = np.zeros_like(num2)
+    data_colors[outlier_data_mask] = 1  # Set outliers to '1' for red
+
+    # Create heatmap
+    plt.imshow(data_colors, cmap=cmap, norm=norm, interpolation='nearest')
+    plt.colorbar(label='Outlier Indicator')
+
+    # Annotate cells with the percentage above mean for outliers
+    for i in range(num2.shape[0]):
+        for j in range(num2.shape[1]):
+            if outlier_data_mask[i, j]:
+                value_above_mean = ((num2[i, j] - mean_value) / mean_value)
+                plt.text(j, i, f'{value_above_mean:.1f}', ha='center', va='center', color='black')
+
+    # Set plot labels and titles
+    plt.xticks(np.arange(len(columns)), columns)
+    plt.yticks(np.arange(len(rows)), rows)
+    plt.xlabel('Columns')
+    plt.ylabel('Rows')
+    plt.title('Heatmap of Outliers')
     plt.show()
 
 

@@ -1,0 +1,14 @@
+{
+    "File_Name": "testdata",
+    "File_Extension": ".xlsx",
+    "User": "BIOTOX40\\ZEB384-3",
+    "Date": "2019-06-14 00:00:00",
+    "Time": "09:11:33",
+    "Compound": "Caffeine",
+    "Strain": "OBI/WIK",
+    "Plate_type": "96 well plate",
+    "Binning": "60.0 seconds",
+    "Data_Type": "trackerr",
+    "Measurement_Time_sec": 2400,
+    "Measurement_Time_min": 40.0
+}

@@ -1,7 +1,8 @@
-import pandas as pd
 import os
 import sys
 import json
+
+import pandas as pd
 
 
 def metadata_compiler(file, output=False):

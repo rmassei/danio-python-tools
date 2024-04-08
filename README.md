@@ -1,12 +1,10 @@
 # danio-python-tools
+
+<a href="https://www.repostatus.org/#active"><img src="https://www.repostatus.org/badges/latest/active.svg" alt="Project Status: Active – The project has reached a stable, usable state and is being actively developed." /></a>
+
 Danio-python tools is a repository collecting different tools for the analysis of behavioural and acute toxicity 
 tests performed with zebrafish (Danio rerio) embryos. 
 
-### Curators and maintainers
-- Riccardo Massei
-
-### Status 
-December 2023 - Active and ongoing project
 
 ### Testing
 The python package, jupiter notebooks can be tested using the testdata.xlsx or testdata2.csv file

@@ -23,7 +23,15 @@ This function will visualize the total sum of a specific endpoint all measuremen
 * **location (str):** The column header of the ViewPoint file listing the animal location, The script accept the format c01 up to c96.
 * **endpoint (str):** The column header of the endpoint to analyze (i.e. smldist, smldur, lardist)
 
+`daniopoint.visualization_functions.visualize_outlayers(file, location, endpoint)`
 
+This function will visualize the outlyers value in the plate (mean + SD). The value show the variation from the highest value
+
+**Parameters:**
+
+* **file (str):** The path with the ViewPoint file (supported extension are .xlsx and .csv)
+* **location (str):** The column header of the ViewPoint file listing the animal location, The script accept the format c01 up to c96.
+* **endpoint (str):** The column header of the endpoint to analyze (i.e. smldist, smldur, lardist)
 
 `daniopoint.visualization_functions.well_response(file, location,  timepoint,  endpoint)`
 
