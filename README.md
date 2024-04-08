@@ -9,7 +9,7 @@ tests performed with zebrafish (Danio rerio) embryos.
 December 2023 - Active and ongoing project
 
 ### Testing
-The python package, jupiter notebooks and KNIME workflows can be tested using the testdata.xlsx or testdata2.csv file
+The python package, jupiter notebooks can be tested using the testdata.xlsx or testdata2.csv file
 
 
 ## daniopoint-py - Python package for behaviour analysis
@@ -89,11 +89,5 @@ txt file.
 * JN - Metadata extraction
 
     metadata_compiler
-
-## KNIME workflows
-
-* KNIME-danio-python-tools-heatmap (KNIME version: 4.7.8)
-  
-  Workflow integrating the visualize_plot python script to create and save a single heatmap
 
 
