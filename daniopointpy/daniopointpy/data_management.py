@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import json
 import os
 
 
@@ -29,3 +30,21 @@ def numpy_transform(file, output):
         result_array = np.concatenate(result_arrays, axis=0)
         result_array = np.transpose(result_array, (1, 2, 0))
         np.save(f"test/numpytest/{i}.numpy", result_array)
+
+def csv_to_nested_json(csv_file_path, json_output_path):
+    # Load the CSV file into a DataFrame
+    df = pd.read_csv(csv_file_path)
+    
+    # Group the data by the 'Well' column and convert it into a nested dictionary
+    nested_dict = {}
+    for well, group in df.groupby('Well'):
+        nested_dict[well] = group.drop(columns=['Well']).to_dict(orient='records')
+    
+    # Convert the nested dictionary to a JSON string
+    json_output = json.dumps(nested_dict, indent=4)
+    
+    # Save the JSON string to a file
+    with open(json_output_path, 'w') as json_file:
+        json_file.write(json_output)
+
+    print(f"JSON file has been created successfully at {json_output_path}.")
